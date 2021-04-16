@@ -156,8 +156,14 @@ objConnectFour = {
         winner = target.every(v => arr.includes(v));
         return winner;
     },
-    highlightWinner:function(){
+    highlightWinner:function(arrWinners){
         console.log('winner');
+        console.log(arrWinners);
+        for(counter=0; counter < arrWinners.length; counter++){
+            key = arrWinners[counter];
+            let parent = this.arrSlots[key].parentNode;
+            parent.style.background = 'green';
+        }
     }
 }
 objConnectFour.init();
