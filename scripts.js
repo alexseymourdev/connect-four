@@ -76,7 +76,7 @@ objConnectFour = {
         [22,27,32,37],
         [23,28,33,38],
     ],
-    arrColumns:[
+    arrColumnKeys:[
         [5,4,3,2,1,0],
         [11,10,9,8,7,6],
         [17,16,15,14,13,12],
@@ -102,26 +102,34 @@ objConnectFour = {
             // console.log(arrNumbers[counter]);
             objColumn = this.arrColumns[counter];
             objColumn.addEventListener("click", function(event){
-                console.log(event);
-                console.log(this);
+                // console.log(event);
+                let key = this.getAttribute('data-column');
+                console.log(key);
+                let currentColumn = _self.arrColumnKeys[key];
+                console.log(currentColumn);
+                for(slotCounter=0;slotCounter < currentColumn.length; slotCounter++){
+                    // console.log(slotCounter);
+                    // console.log(currentColumn[slotCounter]);
+                    // console.log(_self.arrSlots);
+                    currentItem = _self.arrSlots[currentColumn[slotCounter]];
+                    if(currentItem.classList.contains('yellow')){
+                        continue;
+                    }
+                    if(currentItem.classList.contains('red')){
+                        continue;
+                    }
+                    if(!_self.blnWinner){
+                        _self.processSlot(currentItem);
+                        break;
+                    }
+                }
                 // currentItem = event.target;
-                // if(!_self.blnWinner){
-                //     _self.processSlot(currentItem);
-                // }
             });
         }
     },
     processSlot(currentItem){
         // console.log(currentItem);
         // console.log(counter);
-        if(currentItem.classList.contains('yellow')){
-            console.log('this slot is already yellow');
-            return;
-        }
-        if(currentItem.classList.contains('red')){
-            console.log('this slot is already red');
-            return;
-        }
         if(this.blnRed){
             currentItem.classList.add('red');
             this.objPlayer.classList.add('yellow');
