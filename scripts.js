@@ -152,6 +152,7 @@ objConnectFour = {
     processSlot(currentItem){
         // console.log(currentItem);
         // console.log(counter);
+        this.clearHighlight();
         if(this.blnRed){
             currentItem.classList.add('red');
             this.objPlayer.classList.add('yellow');
@@ -169,6 +170,14 @@ objConnectFour = {
     },
     highlightSlot:function(currentItem){
         // console.log(currentItem);
+        this.clearHighlight();
+        if(this.blnRed){
+            currentItem.classList.add('redHighlight');
+        } else {
+            currentItem.classList.add('yellowHighlight');
+        }
+    },
+    clearHighlight:function(){
         let objRedHighlightedSquare = document.querySelector('.redHighlight');
         console.log(objRedHighlightedSquare);
         if(objRedHighlightedSquare){
@@ -177,11 +186,6 @@ objConnectFour = {
         let objYellowHighlightedSquare = document.querySelector('.yellowHighlight');
         if(objYellowHighlightedSquare){
             objYellowHighlightedSquare.classList.remove('yellowHighlight');
-        }
-        if(this.blnRed){
-            currentItem.classList.add('redHighlight');
-        } else {
-            currentItem.classList.add('yellowHighlight');
         }
     },
     hasWinner:function(){
