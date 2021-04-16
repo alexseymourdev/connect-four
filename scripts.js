@@ -139,6 +139,9 @@ let objConnectFour = {
                     }
                 }
             });
+            objColumn.addEventListener("mouseleave", function(event){
+                _self.clearHighlight();
+            });
         }
         this.objReset.addEventListener("click",function(){
             _self.reset();
