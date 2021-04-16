@@ -20,6 +20,15 @@ objConnectFour = {
     },
     processSlot(currentItem){
         console.log(currentItem);
+        if(currentItem.classList.contains('yellow')){
+            console.log('this slot is already yellow');
+            return;
+        }
+        if(currentItem.classList.contains('red')){
+            console.log('this slot is already red');
+            return;
+        }
+        currentItem.classList.add('red');
     }
 }
 objConnectFour.init();
