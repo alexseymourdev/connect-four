@@ -1,5 +1,6 @@
 body{
     background:#0E2234;
+    color:white;
 }
 h1{
     color:white;
@@ -9,4 +10,20 @@ h1{
 }
 .fill-white{
     fill:white;
+}
+.connect_four__wrapper{
+    display:flex;
+    flex-wrap: wrap;
+}
+.slot{
+    background:blue;
+    width:100px;
+    height:100px;
+    padding:10px;
+}
+.checker{
+    background:#0E2234;
+    height:80px;
+    width:80px;
+    border-radius:50px;
 }
