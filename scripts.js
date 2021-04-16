@@ -125,6 +125,28 @@ objConnectFour = {
                 }
                 // currentItem = event.target;
             });
+            objColumn.addEventListener("mouseover", function(event){
+                let key = this.getAttribute('data-column');
+                console.log(key);
+                let currentColumn = _self.arrColumnKeys[key];
+                console.log(currentColumn);
+                for(slotCounter=0;slotCounter < currentColumn.length; slotCounter++){
+                    // console.log(slotCounter);
+                    // console.log(currentColumn[slotCounter]);
+                    // console.log(_self.arrSlots);
+                    currentItem = _self.arrSlots[currentColumn[slotCounter]];
+                    if(currentItem.classList.contains('yellow')){
+                        continue;
+                    }
+                    if(currentItem.classList.contains('red')){
+                        continue;
+                    }
+                    if(!_self.blnWinner){
+                        _self.highlightSlot(currentItem);
+                        break;
+                    }
+                }
+            });
         }
     },
     processSlot(currentItem){
@@ -144,6 +166,23 @@ objConnectFour = {
             this.blnRed = true;
         }
         this.hasWinner();
+    },
+    highlightSlot:function(currentItem){
+        // console.log(currentItem);
+        let objRedHighlightedSquare = document.querySelector('.redHighlight');
+        console.log(objRedHighlightedSquare);
+        if(objRedHighlightedSquare){
+            objRedHighlightedSquare.classList.remove('redHighlight');
+        }
+        let objYellowHighlightedSquare = document.querySelector('.yellowHighlight');
+        if(objYellowHighlightedSquare){
+            objYellowHighlightedSquare.classList.remove('yellowHighlight');
+        }
+        if(this.blnRed){
+            currentItem.classList.add('redHighlight');
+        } else {
+            currentItem.classList.add('yellowHighlight');
+        }
     },
     hasWinner:function(){
         arrYellow = [];
@@ -165,11 +204,17 @@ objConnectFour = {
             if(this.checker(arrRed,arrWinner)){
                 this.highlightWinner(arrWinner);
                 this.blnWinner = true;
+                this.objPlayer.innerHTML = 'Red WINS!'
+                this.objPlayer.classList.add('red');
+                this.objPlayer.classList.remove('red');
                 return;
             }
             if(this.checker(arrYellow,arrWinner)){
                 this.highlightWinner(arrWinner);
                 this.blnWinner = true;
+                this.objPlayer.innerHTML = 'Yellow WINS!'
+                this.objPlayer.classList.add('yellow');
+                this.objPlayer.classList.remove('red');
                 return;
             }
         }
