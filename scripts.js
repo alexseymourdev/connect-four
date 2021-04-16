@@ -1,5 +1,6 @@
 objConnectFour = {
     blnRed:true,
+    blnWinner:false,
     arrWinners:[
         //vertical wins
         [0, 1, 2, 3],
@@ -92,7 +93,9 @@ objConnectFour = {
             objSlot = this.arrSlots[counter];
             objSlot.addEventListener("click", function(event){
                 currentItem = event.target;
-                _self.processSlot(currentItem);
+                if(!_self.blnWinner){
+                    _self.processSlot(currentItem);
+                }
             });
         }
     },
@@ -112,7 +115,7 @@ objConnectFour = {
             this.objPlayer.classList.add('yellow');
             this.objPlayer.classList.remove('red');
             this.objPlayer.innerHTML = 'Yellow to play next';
-            // this.blnRed = false;
+            this.blnRed = false;
         } else {
             currentItem.classList.add('yellow');
             this.objPlayer.classList.add('red');
@@ -141,9 +144,11 @@ objConnectFour = {
             let arrWinner = this.arrWinners[counter];
             if(this.checker(arrRed,arrWinner)){
                 this.highlightWinner(arrRed);
+                this.blnWinner = true;
             }
             if(this.checker(arrYellow,arrWinner)){
                 this.highlightWinner(arrYellow);
+                this.blnWinner = true;
             }
         }
     },
