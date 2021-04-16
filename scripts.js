@@ -66,7 +66,7 @@ objConnectFour = {
         [3,8,13,18],
         [4,9,14,19],
         [5,10,15,20],
-        [9,8,13,18],
+        [9,14,19,24],
         [10,15,20,25],
         [11,16,21,26],
         [15,20,25,30],
@@ -143,12 +143,14 @@ objConnectFour = {
         for(counter=0; counter < this.arrWinners.length; counter++){
             let arrWinner = this.arrWinners[counter];
             if(this.checker(arrRed,arrWinner)){
-                this.highlightWinner(arrRed);
+                this.highlightWinner(arrWinner);
                 this.blnWinner = true;
+                return;
             }
             if(this.checker(arrYellow,arrWinner)){
-                this.highlightWinner(arrYellow);
+                this.highlightWinner(arrWinner);
                 this.blnWinner = true;
+                return;
             }
         }
     },
