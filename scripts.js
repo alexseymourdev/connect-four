@@ -1,12 +1,14 @@
 objConnectFour = {
     blnRed:true,
     init:function(){
-        this.getAllSlots();
+        this.getAllElements();
         this.addEventListeners();
     },
-    getAllSlots:function(){
+    getAllElements:function(){
         this.arrSlots = document.querySelectorAll('.checker');
+        this.objPlayer = document.querySelector('.current_player .player');
         console.log(this.arrSlots);
+        console.log(this.objPlayer);
     },
     addEventListeners:function(){
         _self = this;
@@ -21,6 +23,7 @@ objConnectFour = {
     },
     processSlot(currentItem){
         console.log(currentItem);
+        console.log(this);
         if(currentItem.classList.contains('yellow')){
             console.log('this slot is already yellow');
             return;
@@ -31,9 +34,15 @@ objConnectFour = {
         }
         if(this.blnRed){
             currentItem.classList.add('red');
+            this.objPlayer.classList.add('yellow');
+            this.objPlayer.classList.remove('red');
+            this.objPlayer.innerHTML = 'Yellow to play next';
             this.blnRed = false;
         } else {
             currentItem.classList.add('yellow');
+            this.objPlayer.classList.add('red');
+            this.objPlayer.classList.remove('yellow');
+            this.objPlayer.innerHTML = 'Red to play next';
             this.blnRed = true;
         }
     }

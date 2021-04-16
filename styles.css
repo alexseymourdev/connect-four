@@ -11,7 +11,7 @@ h1{
 .fill-white{
     fill:white;
 }
-.connect_four__wrapper{
+.connect_four__wrapper .board{
     display:flex;
     flex-wrap: wrap;
 }
@@ -32,4 +32,18 @@ h1{
 }
 .checker.red{
     background:red;
+}
+.current_player .player.red{
+    border:1px red solid;
+    color:black;
+    background:pink;
+    border-radius:5px;
+    padding:10px;
+}
+.current_player .player.yellow{
+    border:1px yellowgreen solid;
+    color:black;
+    background:yellow;
+    border-radius:5px;
+    padding:10px;
 }
