@@ -7,8 +7,8 @@ objConnectFour = {
     getAllElements:function(){
         this.arrSlots = document.querySelectorAll('.checker');
         this.objPlayer = document.querySelector('.current_player .player');
-        console.log(this.arrSlots);
-        console.log(this.objPlayer);
+        // console.log(this.arrSlots);
+        // console.log(this.objPlayer);
     },
     addEventListeners:function(){
         _self = this;
@@ -22,8 +22,8 @@ objConnectFour = {
         }
     },
     processSlot(currentItem){
-        console.log(currentItem);
-        console.log(this);
+        // console.log(currentItem);
+        // console.log(this);
         if(currentItem.classList.contains('yellow')){
             console.log('this slot is already yellow');
             return;
@@ -45,6 +45,10 @@ objConnectFour = {
             this.objPlayer.innerHTML = 'Red to play next';
             this.blnRed = true;
         }
+        this.hasWinner();
+    },
+    hasWinner:function(){
+        
     }
 }
 objConnectFour.init();
