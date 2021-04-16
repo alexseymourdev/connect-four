@@ -1,4 +1,5 @@
 objConnectFour = {
+    blnRed:true,
     init:function(){
         this.getAllSlots();
         this.addEventListeners();
@@ -28,7 +29,13 @@ objConnectFour = {
             console.log('this slot is already red');
             return;
         }
-        currentItem.classList.add('red');
+        if(this.blnRed){
+            currentItem.classList.add('red');
+            this.blnRed = false;
+        } else {
+            currentItem.classList.add('yellow');
+            this.blnRed = true;
+        }
     }
 }
 objConnectFour.init();
