@@ -1,6 +1,7 @@
 let objConnectFour = {
     blnRed:true,
     blnWinner:false,
+    blnBack:false,
     currentMove:-1,
     arrHistory:[],
     arrWinners:[
@@ -144,7 +145,8 @@ let objConnectFour = {
         });
         this.objBack.addEventListener("click",function(){
             let lastMove = _self.currentMove - 1;
-            _self.processHistory(_self.arrHistory[lastMove],lastMove);
+            _self.processHistory(_self.arrHistory[lastMove]);
+            _self.currentMove = lastMove;
         });
     },
     reset(){
@@ -164,17 +166,21 @@ let objConnectFour = {
             _self.blnWinner = false;
         }
     },
-    processHistory(objBoard,lastMove){
-        console.log(objBoard);
-        reset();
-        for(counter = 0; counter < _self.arrSlots.length; counter++){
+    processHistory(objBoard){
+        // console.log(objBoard);
+        this.reset();
+        for(counter = 0; counter < this.arrSlots.length; counter++){
             if(objBoard.arrRed.includes(counter)){
-                console.log('had red');
+                // console.log(counter);
+                this.arrSlots[counter].classList.add('red');
             }
             if(objBoard.arrYellow.includes(counter)){
-                console.log('had red');
+                // console.log(counter);
+                this.arrSlots[counter].classList.add('yellow');
             }
         }
+        this.blnRed = !this.blnRed;
+        this.blnBack = true;
     },
     processSlot(currentItem){
         // console.log(currentItem);
@@ -228,11 +234,26 @@ let objConnectFour = {
                 arrRed.push(counter);
             }
         }
-        this.arrHistory.push({
-            'arrRed':arrRed,
-            'arrYellow':arrYellow,
-        });
-        this.currentMove++;
+        if(this.blnBack){
+            let arrHistory = [];
+            for(counter=0; counter <= this.currentMove; counter++){
+                console.log(this.arrHistory[counter]);
+                arrHistory.push(this.arrHistory[counter]);
+            }
+            this.arrHistory[this.currentMove] = {
+                'arrRed':arrRed,
+                'arrYellow':arrYellow,
+            };
+            console.log(arrHistory);
+            this.arrHistory = arrHistory;
+            this.blnBack = false;
+        } else {
+            this.arrHistory.push({
+                'arrRed':arrRed,
+                'arrYellow':arrYellow,
+            });
+            this.currentMove++;
+        }
         console.log(this.arrHistory);
         console.log(this.currentMove);
         // console.log(arrRed);
