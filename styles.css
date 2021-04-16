@@ -78,3 +78,6 @@ h1{
     background-image:url(images/red-game-piece.png);
     opacity: 0.5;
 }
+.green{
+    background:green;
+}

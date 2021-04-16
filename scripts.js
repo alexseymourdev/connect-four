@@ -1,4 +1,4 @@
-objConnectFour = {
+let objConnectFour = {
     blnRed:true,
     blnWinner:false,
     arrWinners:[
@@ -93,24 +93,18 @@ objConnectFour = {
         this.arrSlots = document.querySelectorAll('.checker');
         this.arrColumns = document.querySelectorAll('.column');
         this.objPlayer = document.querySelector('.current_player .player');
+        this.objReset = document.querySelector('.reset');
         // console.log(this.arrSlots);
         // console.log(this.objPlayer);
     },
     addEventListeners:function(){
         _self = this;
         for(counter = 0; counter < this.arrColumns.length; counter++){
-            // console.log(arrNumbers[counter]);
             objColumn = this.arrColumns[counter];
             objColumn.addEventListener("click", function(event){
-                // console.log(event);
                 let key = this.getAttribute('data-column');
-                console.log(key);
                 let currentColumn = _self.arrColumnKeys[key];
-                console.log(currentColumn);
                 for(slotCounter=0;slotCounter < currentColumn.length; slotCounter++){
-                    // console.log(slotCounter);
-                    // console.log(currentColumn[slotCounter]);
-                    // console.log(_self.arrSlots);
                     currentItem = _self.arrSlots[currentColumn[slotCounter]];
                     if(currentItem.classList.contains('yellow')){
                         continue;
@@ -123,17 +117,11 @@ objConnectFour = {
                         break;
                     }
                 }
-                // currentItem = event.target;
             });
             objColumn.addEventListener("mouseover", function(event){
                 let key = this.getAttribute('data-column');
-                console.log(key);
                 let currentColumn = _self.arrColumnKeys[key];
-                console.log(currentColumn);
                 for(slotCounter=0;slotCounter < currentColumn.length; slotCounter++){
-                    // console.log(slotCounter);
-                    // console.log(currentColumn[slotCounter]);
-                    // console.log(_self.arrSlots);
                     currentItem = _self.arrSlots[currentColumn[slotCounter]];
                     if(currentItem.classList.contains('yellow')){
                         continue;
@@ -148,6 +136,23 @@ objConnectFour = {
                 }
             });
         }
+        this.objReset.addEventListener("click",function(){
+            _self.arrRed = [];
+            _self.arrYellow = [];
+            for(counter = 0; counter < _self.arrSlots.length; counter++){
+                objSlot = _self.arrSlots[counter];
+                objSlot.classList.remove('red');
+                objSlot.classList.remove('yellow');
+                objSlot.classList.remove('redHighlight');
+                objSlot.classList.remove('yellowHighlight');
+                let parent = objSlot.parentNode;
+                parent.classList.remove('green');
+                _self.objPlayer.classList.remove('yellow');
+                _self.objPlayer.classList.add('red');
+                _self.objPlayer.innerHTML = 'Red to play first';
+                _self.blnWinner = false;
+            }
+        });
     },
     processSlot(currentItem){
         // console.log(currentItem);
@@ -179,7 +184,7 @@ objConnectFour = {
     },
     clearHighlight:function(){
         let objRedHighlightedSquare = document.querySelector('.redHighlight');
-        console.log(objRedHighlightedSquare);
+        // console.log(objRedHighlightedSquare);
         if(objRedHighlightedSquare){
             objRedHighlightedSquare.classList.remove('redHighlight');
         }
@@ -201,6 +206,13 @@ objConnectFour = {
                 arrRed.push(counter);
             }
         }
+        this.arrHistory.push({
+            'arrRed':arrRed,
+            'arrYellow':arrYellow,
+        });
+        this.currentMove++;
+        console.log(this.arrHistory);
+        console.log(this.currentMove);
         // console.log(arrRed);
         // console.log(arrYellow);
         for(counter=0; counter < this.arrWinners.length; counter++){
@@ -210,7 +222,7 @@ objConnectFour = {
                 this.blnWinner = true;
                 this.objPlayer.innerHTML = 'Red WINS!'
                 this.objPlayer.classList.add('red');
-                this.objPlayer.classList.remove('red');
+                this.objPlayer.classList.remove('yellow');
                 return;
             }
             if(this.checker(arrYellow,arrWinner)){
@@ -229,11 +241,11 @@ objConnectFour = {
     },
     highlightWinner:function(arrWinners){
         console.log('winner');
-        console.log(arrWinners);
+        // console.log(arrWinners);
         for(counter=0; counter < arrWinners.length; counter++){
             key = arrWinners[counter];
             let parent = this.arrSlots[key].parentNode;
-            parent.style.background = 'green';
+            parent.classList.add('green');
         }
     }
 }
