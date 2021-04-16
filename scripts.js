@@ -1,6 +1,8 @@
 let objConnectFour = {
     blnRed:true,
     blnWinner:false,
+    currentMove:-1,
+    arrHistory:[],
     arrWinners:[
         //vertical wins
         [0, 1, 2, 3],
@@ -94,6 +96,7 @@ let objConnectFour = {
         this.arrColumns = document.querySelectorAll('.column');
         this.objPlayer = document.querySelector('.current_player .player');
         this.objReset = document.querySelector('.reset');
+        this.objBack = document.querySelector('.back');
         // console.log(this.arrSlots);
         // console.log(this.objPlayer);
     },
@@ -137,22 +140,41 @@ let objConnectFour = {
             });
         }
         this.objReset.addEventListener("click",function(){
-            _self.arrRed = [];
-            _self.arrYellow = [];
-            for(counter = 0; counter < _self.arrSlots.length; counter++){
-                objSlot = _self.arrSlots[counter];
-                objSlot.classList.remove('red');
-                objSlot.classList.remove('yellow');
-                objSlot.classList.remove('redHighlight');
-                objSlot.classList.remove('yellowHighlight');
-                let parent = objSlot.parentNode;
-                parent.classList.remove('green');
-                _self.objPlayer.classList.remove('yellow');
-                _self.objPlayer.classList.add('red');
-                _self.objPlayer.innerHTML = 'Red to play first';
-                _self.blnWinner = false;
-            }
+            _self.reset();
         });
+        this.objBack.addEventListener("click",function(){
+            let lastMove = _self.currentMove - 1;
+            _self.processHistory(_self.arrHistory[lastMove],lastMove);
+        });
+    },
+    reset(){
+        _self.arrRed = [];
+        _self.arrYellow = [];
+        for(counter = 0; counter < _self.arrSlots.length; counter++){
+            objSlot = _self.arrSlots[counter];
+            objSlot.classList.remove('red');
+            objSlot.classList.remove('yellow');
+            objSlot.classList.remove('redHighlight');
+            objSlot.classList.remove('yellowHighlight');
+            let parent = objSlot.parentNode;
+            parent.classList.remove('green');
+            _self.objPlayer.classList.remove('yellow');
+            _self.objPlayer.classList.add('red');
+            _self.objPlayer.innerHTML = 'Red to play first';
+            _self.blnWinner = false;
+        }
+    },
+    processHistory(objBoard,lastMove){
+        console.log(objBoard);
+        reset();
+        for(counter = 0; counter < _self.arrSlots.length; counter++){
+            if(objBoard.arrRed.includes(counter)){
+                console.log('had red');
+            }
+            if(objBoard.arrYellow.includes(counter)){
+                console.log('had red');
+            }
+        }
     },
     processSlot(currentItem){
         // console.log(currentItem);
