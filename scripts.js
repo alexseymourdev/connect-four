@@ -76,26 +76,38 @@ objConnectFour = {
         [22,27,32,37],
         [23,28,33,38],
     ],
+    arrColumns:[
+        [5,4,3,2,1,0],
+        [11,10,9,8,7,6],
+        [17,16,15,14,13,12],
+        [23,22,21,20,19,18],
+        [29,28,27,26,25,24],
+        [35,34,33,32,31,30],
+        [41,40,39,38,37,36],
+    ],
     init:function(){
         this.getAllElements();
         this.addEventListeners();
     },
     getAllElements:function(){
         this.arrSlots = document.querySelectorAll('.checker');
+        this.arrColumns = document.querySelectorAll('.column');
         this.objPlayer = document.querySelector('.current_player .player');
         // console.log(this.arrSlots);
         // console.log(this.objPlayer);
     },
     addEventListeners:function(){
         _self = this;
-        for(counter = 0; counter < this.arrSlots.length; counter++){
+        for(counter = 0; counter < this.arrColumns.length; counter++){
             // console.log(arrNumbers[counter]);
-            objSlot = this.arrSlots[counter];
-            objSlot.addEventListener("click", function(event){
-                currentItem = event.target;
-                if(!_self.blnWinner){
-                    _self.processSlot(currentItem);
-                }
+            objColumn = this.arrColumns[counter];
+            objColumn.addEventListener("click", function(event){
+                console.log(event);
+                console.log(this);
+                // currentItem = event.target;
+                // if(!_self.blnWinner){
+                //     _self.processSlot(currentItem);
+                // }
             });
         }
     },

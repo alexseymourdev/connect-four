@@ -15,8 +15,13 @@ h1{
     display:flex;
     flex-wrap: wrap;
 }
-.slot{
+.column{
     background:blue;
+}
+.column:hover{
+    background:lightblue;
+}
+.slot{
     width:100px;
     height:100px;
     padding:10px;
