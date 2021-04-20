@@ -182,27 +182,34 @@ let objConnectFour = {
                 this.arrSlots[counter].classList.add('yellow');
             }
         }
-        this.blnRed = !this.blnRed;
+        this.processPlayer();
         this.blnBack = true;
     },
-    processSlot(currentItem){
+    processSlot:function(currentItem){
         // console.log(currentItem);
         // console.log(counter);
         this.clearHighlight();
         if(this.blnRed){
             currentItem.classList.add('red');
+            this.processPlayer();
+        } else {
+            currentItem.classList.add('yellow');
+            this.processPlayer();
+        }
+        this.hasWinner();
+    },
+    processPlayer:function(){
+        if(this.blnRed){
             this.objPlayer.classList.add('yellow');
             this.objPlayer.classList.remove('red');
             this.objPlayer.innerHTML = 'Yellow to play next';
             this.blnRed = false;
         } else {
-            currentItem.classList.add('yellow');
             this.objPlayer.classList.add('red');
             this.objPlayer.classList.remove('yellow');
             this.objPlayer.innerHTML = 'Red to play next';
             this.blnRed = true;
         }
-        this.hasWinner();
     },
     highlightSlot:function(currentItem){
         // console.log(currentItem);
@@ -249,6 +256,7 @@ let objConnectFour = {
             };
             console.log(arrHistory);
             this.arrHistory = arrHistory;
+            this.currentMove++;
             this.blnBack = false;
         } else {
             this.arrHistory.push({
